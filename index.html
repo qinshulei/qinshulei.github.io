@@ -1,13 +1,18 @@
 ---
 layout: default
-title: Your New Jekyll Site
+title: 书磊的首页
 ---
 
 <div id="home">
-  <h1>Blog Posts</h1>
+  <h1>文章目录</h1>
   <ul class="posts">
     {% for post in site.posts %}
       <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>
 </div>
+<div id="me">
+  <img src="/images/me.jpg"/>
+</div>
+<div class="clear"></div>
+

@@ -29,6 +29,11 @@ a         { color: #00a; }
 a:hover   { color: #000; }
 a:visited { color: #a0a; }
 
+.clear{
+    clear:both;
+}
+
+
 /*****************************************************************************/
 /*
 /* Home
@@ -48,6 +53,17 @@ ul.posts span {
   font-family: Monaco, "Courier New", monospace;
   font-size: 80%;
 }
+
+
+#home{
+    float:left;
+}
+
+#me{
+    float:right;
+}
+
+
 
 /*****************************************************************************/
 /*
