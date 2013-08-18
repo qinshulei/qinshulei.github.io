@@ -25,14 +25,16 @@ h1, h2, h3, h4, h5, h6 {
 h1 { margin-bottom: 1em; }
 p { margin: 1em 0; }
 
-a         { color: #00a; }
-a:hover   { color: #000; }
-a:visited { color: #a0a; }
+a         { color: #000; }
+a:hover   { color: red; }
+a:visited { color: #00C; }
 
 .clear{
     clear:both;
 }
-
+.disabled{
+    display:none;
+}
 
 /*****************************************************************************/
 /*
@@ -56,11 +58,30 @@ ul.posts span {
 
 
 #home{
+
+}
+
+/*****************************************************************************/
+/*
+/* About
+/*
+/*****************************************************************************/
+#about{
     float:left;
+    width:70%;
 }
 
 #me{
     float:right;
+}
+
+.site .contact {
+  float: left;
+  margin-right: 3em;
+}
+
+.site .contact a {
+  color: #8085C1;
 }
 
 
@@ -74,7 +95,8 @@ ul.posts span {
 .site {
   font-size: 115%;
   text-align: justify;
-  width: 42em;
+  /*width: 42em;*/
+  width:90%;
   margin: 3em auto 2em;
   line-height: 1.5em;
 }
@@ -94,7 +116,7 @@ ul.posts span {
 }
 
 .site .header h1.title a:hover {
-  color: #000;
+  color: red;
 }
 
 .site .header a.extra {
@@ -103,7 +125,7 @@ ul.posts span {
 }
 
 .site .header a.extra:hover {
-  color: #000;
+  color: red;
 }
 
 .site .meta {
@@ -118,15 +140,6 @@ ul.posts span {
   overflow: hidden;
 }
 
-.site .footer .contact {
-  float: left;
-  margin-right: 3em;
-}
-
-.site .footer .contact a {
-  color: #8085C1;
-}
-
 .site .footer .rss {
   margin-top: 1.1em;
   margin-right: -.2em;
@@ -135,6 +148,26 @@ ul.posts span {
 
 .site .footer .rss img {
   border: 0;
+}
+/*****************************************************************************/
+/*
+/* footer
+/*
+/*****************************************************************************/
+.site .footer p {
+    text-align:center;
+}
+/*****************************************************************************/
+/*
+/*pagination
+/*
+/*****************************************************************************/
+.pagination p{
+    
+}
+
+.pagination ul li{
+    list-style-type:none;
 }
 
 /*****************************************************************************/

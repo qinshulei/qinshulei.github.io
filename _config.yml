@@ -2,3 +2,4 @@ name: qin shulei
 markdown: redcarpet
 pygments: false
 timezone: Asia/Shanghai
+paginate: 5
