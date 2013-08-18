@@ -2,12 +2,16 @@
 layout: default
 title: 关于我
 ---
-{% include header.html %}
 <div id="about">
   <div>
-    <h1>关于我</h1>
-    <p>
+    <div class="page-header">
+      <h1>关于我</h1>
+    </div>
+    <p class="lead">
       随波逐流的菜鸟程序员。
+    </p>
+    <p>
+      喜欢编程，喜欢各式各样的技术，但都是basic~
     </p>
   </div>
   <div class="contact">
@@ -30,4 +34,9 @@ title: 关于我
 </div>
 
 <div class="clear"></div>
-{% include footer.html %}
+
+<script>
+  $(document).ready(function(){
+  $("#aboutlink").addClass("active");
+  });
+</script>

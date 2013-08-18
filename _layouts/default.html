@@ -6,20 +6,27 @@
         <title>{{ page.title }}</title>
         <meta name="viewport" content="width=device-width">
 
+	<!--bootstrap-->
+	<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/main.css">
+	      
+	<!--js-->
+	<script src="/js/jquery-1.10.2.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 
     </head>
     <body>
 
+      {% include header.html %}
       <div class="container">
-        <div class="site">
-          {{ content }}
-	</div>	
-      </div> <!-- /container -->
+        {{ content }}
 
+	<hr class="featurette-divider">
+	{% include footer.html %}
+      </div> <!-- /container -->
     </body>
 </html>
