@@ -4,9 +4,6 @@ title:  "记录一下博客的搭建"
 date: 2013-08-22 23:57:23
 categories: blog
 ---
-
-## 记录此次建github pages博客历程 ##
-
 ### 安装ruby ###
 [ruby][ruby-download] ruby官网下载，github的博客系统是ruby的
 [ruby-download]: http://www.ruby-lang.org/en/downloads/ "ruby"
