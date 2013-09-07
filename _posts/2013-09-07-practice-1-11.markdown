@@ -10,7 +10,7 @@ categories: blog lisp
 
 如下两个程序等价：
 
-{% highlight lisp %}
+{% highlight Scheme %}
 (define (calc n )
   (cond ((< n 3) n)
 	(else (+ (calc (- n 1)) (* (calc (- n 2)) 2) (* 3 (calc (- n 3)))))))
