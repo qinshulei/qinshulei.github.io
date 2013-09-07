@@ -1,0 +1,35 @@
+---
+layout: post
+title:  "迭代和递归"
+date: 2013-09-05 14:53:23
+categories: blog lisp
+---
+
+迭代和递归都是编程中常用的结构，递归更直观。但是递归会占用编译器更多地堆栈去保存方法调用链。
+一般情况下，递归的程序都可以通过保存关键状态，改写成迭代的形式，这样可以有效地提高性能。也不用担心递归导致的堆栈溢出问题了。
+
+如下两个程序等价：
+
+{% highlight lisp %}
+(define (calc n )
+  (cond ((< n 3) n)
+	(else (+ (calc (- n 1)) (* (calc (- n 2)) 2) (* 3 (calc (- n 3)))))))
+;Value: calc
+
+(calc 6)
+;Value: 59
+
+(define (calc-iter n)
+  (cond ((< n 3) n)
+	(else 
+	 (calc-iter-step 0 1 2 n))))
+;Value: calc-iter
+ 
+(define (calc-iter-step n-3 n-2 n-1 n)
+  (if (= n 0)
+      n-3
+      (calc-iter-step n-2 n-1 (+ (* n-3 3) (* n-2 2) n-1) (- n 1))))
+;Value: calc-iter-step
+(calc-iter 6)
+;Value: 59
+{% endhighlight %}
