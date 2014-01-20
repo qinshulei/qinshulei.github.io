@@ -87,6 +87,12 @@ qinshulei@qinshulei:~/tmp$ [-n "$dontexitvar"]
  - `!`　　　　　　　　非
 
 
++ 远程复制scp，从其他机器拷贝资料
+{% highlight bash %}
+qinshulei@qinshulei:~$ scp .ssh/id_rsa.pub  tangjiajia@192.168.65.88:/home/tangjiajia/test
+tangjiajia@192.168.65.88's password: 
+id_rsa.pub                                                                                                                                                                 100%  401     0.4KB/s   00:00   
+{% endhighlight %}
 
 
 
