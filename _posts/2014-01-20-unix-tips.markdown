@@ -94,9 +94,16 @@ tangjiajia@192.168.65.88's password:
 id_rsa.pub                                                                                                                                                                 100%  401     0.4KB/s   00:00   
 {% endhighlight %}
 
++ 查询机器核心数目:
+{% highlight bash %}
+$ grep "^processor" /proc/cpuinfo | wc -l
+4
+{% endhighlight %}
 
-
-
-
++ 简单计算
+{% highlight bash %}
+$ expr 1 + 1
+2
+{% endhighlight %}
 
 
