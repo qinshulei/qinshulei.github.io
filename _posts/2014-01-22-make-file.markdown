@@ -1,0 +1,48 @@
+---
+layout: post
+title:  "makefile tips"
+date:   2014-01-22 15:35:06
+categories: linux
+tages: linux
+---
+
++ 替换变量中的后缀，值得一提的是不能有多余的空格。
+{% highlight makefile %}
+#很多.o结尾的文件
+data := a.o b.o c.o
+
+#将.o替换为.c
+var := $(data:.o=.c)
+
+.PHONY: test
+test:
+	echo $(var)
+{% endhighlight %}
+
+运行结果如下：
+{% highlight bash %}
+$ make test
+echo a.c b.c c.c
+a.c b.c c.c
+{% endhighlight %}
+
++ 将变量写在一行就会拼接成串
+{% highlight makefile %}
+data1=ta1
+data2=ta2
+
+var=$ta1$ta2
+
+
+.PHONY: test
+test:
+	echo $(var)
+{% endhighlight %}
+
+运行结果如下：
+{% highlight bash %}
+$ make test
+echo a1a2
+a1a2
+{% endhighlight %}
+
