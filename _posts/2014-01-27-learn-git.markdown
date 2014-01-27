@@ -1,0 +1,18 @@
+---
+layout: post
+title:  "git学习"
+date:   2014-01-27 11:27:09
+categories: linux
+tages: linux
+---
+
++ commitid..commitid可以表示范围，比如查看日志的时候指定范围，便可以查看该范围内的改动
+{% highlight bash %}
+$ git log ee8d64f42d4c80faed708313d56594613daba629..348488f2f3cfd124a289f77bd920715ba499e88e
+commit 348488f2f3cfd124a289f77bd920715ba499e88e
+Date:   Mon Jan 20 12:51:51 2014 +0800
+
+commit df97d79d99c36303c5b6d7d9b49afb7c2b1aa1eb
+Date:   Wed Jan 15 20:58:18 2014 +0800
+
+{% endhighlight %}
