@@ -107,3 +107,7 @@ $ expr 1 + 1
 {% endhighlight %}
 
 
++ 后台运行程序
+{% highlight bash %}
+$ nohup cmd 2>&1 1>xx.out &
+{% endhighlight %}
