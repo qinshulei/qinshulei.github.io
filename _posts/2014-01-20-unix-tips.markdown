@@ -111,3 +111,10 @@ $ expr 1 + 1
 {% highlight bash %}
 $ nohup cmd 2>&1 1>xx.out &
 {% endhighlight %}
+
+
++ 杀死nohup的进程
+{% highlight bash %}
+$ ps -ef | grep command
+$ kill -9 pid
+{% endhighlight %}

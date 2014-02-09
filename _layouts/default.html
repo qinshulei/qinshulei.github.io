@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{{ page.title }}</title>
-        <meta name="viewport" content="width=device-width">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{{ page.title }}</title>
+    <meta name="viewport" content="width=device-width">
 
 	<!--bootstrap-->
 	<link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <!-- syntax highlighting CSS -->
-        <link rel="stylesheet" href="/css/syntax.css">
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
 
-        <!-- Custom CSS -->
+    <!-- Custom CSS -->
 	<link rel="stylesheet" href="/css/main.css">
-	      
+	
 	<!--js-->
 	<script src="/js/jquery-1.10.2.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 
-    </head>
-    <body>
+  </head>
+  <body>
 
-      {% include header.html %}
-      <div class="container">
-        {{ content }}
+    {% include header.html %}
+    <div class="container">
+      {{ content }}
 
-	<hr class="featurette-divider">
-	<!-- Duoshuo Comment BEGIN -->
-	<div class="ds-thread"></div>
-	<script type="text/javascript">
-	  var duoshuoQuery = {short_name:"qinshulei"};
-	  (function() {
-	  var ds = document.createElement('script');
-	  ds.type = 'text/javascript';ds.async = true;
-	  ds.src = 'http://static.duoshuo.com/embed.js';
-	  ds.charset = 'UTF-8';
-	  (document.getElementsByTagName('head')[0] 
-	  || document.getElementsByTagName('body')[0]).appendChild(ds);
-	  })();
-	</script>
-	<!-- Duoshuo Comment END -->
-
-
-
-    <!-- JiaThis Button BEGIN -->
-    <script type="text/javascript">
-      var jiathis_config = {data_track_clickback:'true'};
-    </script>
-    <script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?type=left&amp;move=0&amp;btn=l3.gif&amp;uid=1355231392709975" charset="utf-8"></script>
-    <!-- JiaThis Button END -->
+	  <hr class="featurette-divider">
+	  <!-- Duoshuo Comment BEGIN -->
+	  <div class="ds-thread"></div>
+	  <script type="text/javascript">
+		var duoshuoQuery = {short_name:"qinshulei"};
+		(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	  </script>
+	  <!-- Duoshuo Comment END -->
 
 
 
+      <!-- JiaThis Button BEGIN -->
+      <script type="text/javascript">
+		var jiathis_config = {data_track_clickback:'true'};
+      </script>
+      <script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?type=left&amp;move=0&amp;btn=l3.gif&amp;uid=1355231392709975" charset="utf-8"></script>
+      <!-- JiaThis Button END -->
 
-	<hr class="featurette-divider">
-	{% include footer.html %}
-      </div> <!-- /container -->
-    </body>
+
+
+
+	  <hr class="featurette-divider">
+	  {% include footer.html %}
+    </div> <!-- /container -->
+  </body>
 </html>
