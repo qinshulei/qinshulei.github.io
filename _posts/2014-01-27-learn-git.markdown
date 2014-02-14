@@ -15,3 +15,85 @@ Date:   Mon Jan 20 12:51:51 2014 +0800
 commit df97d79d99c36303c5b6d7d9b49afb7c2b1aa1eb
 Date:   Wed Jan 15 20:58:18 2014 +0800
 {% endhighlight %}
+
+
++ 查看git版本库版本信息
+{% highlight bash %}
+$ git --version
+git version 1.7.9.5
+{% endhighlight %}
+
++ 配置gitconfig
+{% highlight bash %}
+$ git config --global user.name "qinsl0106"
+$ git config --global user.email "qinsl0106@thundersoft.com"
+$ git config --global core.editor emacs
+$ git config --global color.ui auto
+$ cat .gitconfig
+{% endhighlight %}
+
++ 配置ssh的pubkey，通过配置rsa的key，可以避免每次都要输入密码。
+{% highlight bash %}
+$ ssh-keygen -t rsa
+$ cat id_rsa.pub # 将内容粘贴到gerrit或者其他的git库的配置里
+{% endhighlight %}
+
+
++ 从gerrit库下载代码
+{% highlight bash %}
+$ git clone ssh://qinsl0106@192.168.65.11:29418/test/exercise-2a -b test
+{% endhighlight %}
+
+
+
++ git添加新代码到staged区域
+{% highlight bash %}
+$ git add -A .
+{% endhighlight %}
+
++ git 清除新文件
+{% highlight bash %}
+$ git clean -f
+
+{% endhighlight %}
+
++ git 清楚staged的内容
+{% highlight bash %}
+$ git reset --hard HEAD
+{% endhighlight %}
+
++ git 查看staged和当前目录的状态
+{% highlight bash %}
+$ git status
+{% endhighlight %}
+
+
++ git 查看日志
+{% highlight bash %}
+$ git log
+
+$ git log feature #查看指定分支的日志
+$ git log  -- file #查看指定文件的日志
+{% endhighlight %}
+
++ git 查看分支
+{% highlight bash %}
+$ git branch
+* test
+
+$ git branch -a # 查看所有分支，包括远程分支
+{% endhighlight %}
+
++ git 文件比较
+{% highlight bash %}
+$ git diff # 显示工作目录和staged的区别
+$ git diff --cached commit #比较staged和库中指定提交的区别
+$ git diff brach1..branch2 #显示两个branch之间的区别
+
+{% endhighlight %}
+
++ gerrit 提交
+{% highlight bash %}
+$ git push ts-exercise test:refs/for/master
+#其中ts-exercise是某个remote的别名。 refs/for/master是gerrit上的库
+{% endhighlight %}
