@@ -186,3 +186,61 @@ $ crontab <<EOF
 $ crontab -l
 00 01 * * * /sbin/shutdown -h
 {% endhighlight %}
+
++ 用户管理,用户信息存于`／etc/passwd`中,1-500 是系统预ID。500以上是普通用户.用户组通常用来描述用户详细信息。
+{% highlight bash %}
+$  more /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+qinshulei:x:1000:1000:qinshulei,,,:/home/qinshulei:/bin/bash
+{% endhighlight %}
+
++ 用户密码存于`/etc/shadow`，快来破解我的密码。shadow采用DES加密方式，破解方式为暴力破解，可以采用字典攻击
+{% highlight bash %}
+sudo cat /etc/shadow
+[sudo] password for qinshulei:
+qinshulei:$6$xhw9lQPp$kiscnXnFi9b1Ue7HNw435J3bGGRixWUwY4c96PZyHSx2/0rFvTeMJu/Y7vtqT9LdYCNY2KM7E86ZKnX5TOeKH0:16080:0:99999:7:::
+{% endhighlight %}
+
++ 创建组：
+{% highlight bash %}
+$ sudo addgroup ccache
+[sudo] password for qinshulei: 
+Adding group `ccache' (GID 1002) ...
+Done.
+{% endhighlight %}
+
++ 创建用户
+{% highlight bash %}
+$ sudo useradd ccache -g ccache -M
+#创建用户，并创建对应目录
+{% endhighlight %}
+
++ 显示用户id及信息
+{% highlight bash %}
+$ id
+uid=1000(qinshulei) gid=1000(qinshulei) groups=1000(qinshulei),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),124(sambashare)
+{% endhighlight %}
+
++ 显示用户组信息。信息存于`/etc/group`
+{% highlight bash %}
+$ more /etc/group
+qinshulei:x:1000:
+{% endhighlight %}
+
++ 修改用户信息
+{% highlight bash %}
+$ sudo usermod -p 123456 qinsl0106
+{% endhighlight %}
+
+
++ 删除用户
+{% highlight bash %}
+sudo userdel -r ccache
+userdel: ccache home directory (/home/ccache) not found
+{% endhighlight %}
+
++ 查看登录用户名
+{% highlight bash %}
+$ whoami
+qinshulei
+{% endhighlight %}
