@@ -97,3 +97,16 @@ $ git diff brach1..branch2 #显示两个branch之间的区别
 $ git push ts-exercise test:refs/for/master
 #其中ts-exercise是某个remote的别名。 refs/for/master是gerrit上的库
 {% endhighlight %}
+
+
++ git 生成最后一次提交的patch
+{% highlight bash %}
+$ git format-patch -1
+0001-commit-useradd.patch
+{% endhighlight %}
+
++ git 打patch
+{% highlight bash %}
+$ git am 0001-commit-useradd.patch
+{% endhighlight %}
+
