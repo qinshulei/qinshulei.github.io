@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "gerrit 学习"
+date:   2014-02-21 11:02:29
+categories: linux git gerrit scm
+tages: linux
+---
+
+
++ gerrit 可以通过http和ssh两种方式访问，其中http的端口一般为8080，ssh的端口为29418
+
+

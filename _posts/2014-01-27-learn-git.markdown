@@ -110,3 +110,19 @@ $ git format-patch -1
 $ git am 0001-commit-useradd.patch
 {% endhighlight %}
 
+
++ git clean加n选项包括文件夹，加f强制
+{% highlight bash %}
+$ git clean -nf
+{% endhighlight %}
+
++ 查看默认的push信息
+{% highlight bash %}
+$ git remote -v
+{% endhighlight %}
+
+
++ 查看所有分支，不带-a选项，只能看到本地的
+{% highlight bash %}
+$ git branch -a
+{% endhighlight %}
