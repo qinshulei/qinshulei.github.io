@@ -7,6 +7,10 @@ tages: linux
 ---
 
 
-+ gerrit 可以通过http和ssh两种方式访问，其中http的端口一般为8080，ssh的端口为29418
++ gerrit 可以通过http和ssh两种方式访问，其中http的端口一般为8080，ssh的端口为29418 。 其中http接口同时还支持REST api，以及普通的页面访问。故一共三种操作思路. web适合日常临时操作。ssh适合日常重复操作.REST api适合编写精简客户端，或者hubot脚本
 
 
++ gerrit 通过ssh操作。常用操作:
+  - review 代码 `ssh -p 29418 qinshulei@review.xxx.com gerrit review --verified +1 --code-review +2 --submit 767484,1`
+  - 查看changes 的当前patch set, `ssh -p 29418 qinshueli@review.xxx.com gerrit query --format=JSON --commit-message 767486  --current-patch-set `
+  
