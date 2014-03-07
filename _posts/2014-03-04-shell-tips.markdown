@@ -299,3 +299,77 @@ total 20
 -rwxrwxr-x 1 qinshulei qinshulei 339  3月  6 18:52 test
 {% endhighlight%}
 
+
++ 计算字符串长度
+{% hightlight bash %}
+$ expr length "abcde"
+5
+{% endhighlight%}
+
+
++ shell中我们可以是使用getopt管理命令行参数，使用shift管理位置参数。参数的特殊shell变量`OPTIND` `OPTARG`
+
+
++ `|` 和`()`都会进入子shell执行，而子shell的变量是不会传给父shell的。所以这里要留心。
+
++ read和IFS有个特殊写法，就是直接在行首定义IFS，然后这个变量只作用与当前行.
+{% hightlight bash %}
+printf "%s" $IFS | od -b
+printf "begin\n"
+while IFS=: read login a b c name e; do
+#    printf "%-12s %s\n" "$login" "$name"
+    printf "%s" $IFS | od -b
+    printf "in\n"
+done < /etc/passwd
+
+printf "%s" $IFS | od -b
+printf "end\n"
+
+{% endhighlight%}
+
++ 设置变量默认值.`${var:-default}`当字符为空或未设置设置默认值。 `${var-default}`只当未设置设置默认值。 `${var:+alternate}`只当字符设置，设置为默认值 `${var+alternate}` 当字符设置或者为空，设置默认值. 
+{% hightlight bash %}
+$ var=
+$ sa "${var:-default}"
+:default:
+{% endhighlight%}
+
+第一个字符为空，所以就不会加空格。
+{% hightlight bash %}
+for n in a b c d e f;do
+> var="${var:+"$var "}$n"
+> done
+qinshulei@qinshulei:~/bpl/bi
+qinshulei@qinshulei:~/bpl/bin$ sa "${var}"
+:a b c d e f:
+{% endhighlight%}
+
++ `${var:?message}`,如果未设置值，报错。`${var:=default}`与`${var:-default}`类似。但会输出
+{% hightlight bash %}
+${1:? an argument is required} #必须输入一个参数的判断
+{% endhighlight%}
+
++ `${#var}`显示变量长度。
+{% hightlight bash %}
+$ var="1234567"
+$ printf "%s\n" ${#var}
+7
+{% endhighlight%}
+
++ `${var%PATTERN}` 去除结尾匹配的字符。shell真变态，搞这么多变量的语法。。。。。 `${var%%PATTERN}` 去掉结尾匹配最长的串.`${var#PATRERN}`去掉开始匹配的最短串，`${var##PATRERN}`去掉开始匹配的最长串
+{% hightlight bash %}
+$ var="tttggg"
+$ var=${var%g??}
+$ printf "%s\n" $var
+ttt
+{% endhighlight%}
+取出参数中的目录
+{% hightlight bash %}
+case $1 in
+    */*) printf "%s\n" "${1%/*}" ;;
+    *) [ -e "$1" ] && printf "%s\n" "$PWD" || echo '.' ;;
+esac
+{% endhighlight%}
+
+
+
