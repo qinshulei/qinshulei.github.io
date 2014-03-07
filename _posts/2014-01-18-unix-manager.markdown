@@ -244,3 +244,10 @@ userdel: ccache home directory (/home/ccache) not found
 $ whoami
 qinshulei
 {% endhighlight %}
+
+
++ 有两种方法通过shell提示信息。一个是`zenity`,一个是`notify-send`
+{% hightlight bash %}
+$ zenity --notification --text "work done"
+$ notify-send "complie" "done"
+{% endhighlight%}
