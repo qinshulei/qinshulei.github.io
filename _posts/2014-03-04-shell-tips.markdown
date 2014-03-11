@@ -48,14 +48,14 @@ echo -e "\e[1;47m this is 47m text \e[0m"
 
 
 + `pwd` 可以显示当前路径，`$PWD`变量同样显示当前路径
-{% hightlight bash %}
+{% highlight bash %}
 $ echo $PWD
 /home/qinshulei/qinshulei.github.io/_posts
 {% endhighlight%}
 
 
 + `type`命令可以查看命令的类型，由谁提供
-{% hightlight bash %}
+{% highlight bash %}
 $type -a test
 test is a shell builtin
 test is /usr/bin/test
@@ -67,7 +67,7 @@ test is /usr/bin/test
 + `source` 执行shell程序，也可以用(dot)即`.`，和shell文件正常的执行的区别是，正常的执行系统会自动fork一个新的shell去执行程序文件中的shell。这样改变环境变量之类的操作就不会作用与当前的终端上。而source则用当前终端去执行等同于直接在终端敲命令，这样对环境变量的更改就会作用与当前终端。经典的例子是android，在编译之前会把build目录下的env脚本source一下，就是这个目的。
 
 + shell中有无数特殊变量，以下为含义
-{% hightlight bash %}
+{% highlight bash %}
 #!/bin/bash
 #: Title                  : special parameters
 #: Date                   : 2014-03-06
@@ -87,7 +87,7 @@ printf "the ! is last PID: %s \n" $!
 printf "the - is flage information : %s\n" $-
 {% endhighlight%}
 
-{% hightlight bash %}
+{% highlight bash %}
 $ special_parameters  arg1
 the * is all args: arg1 
 the @ is all args: arg1 
@@ -102,13 +102,13 @@ the - is flage information : hB
 
 
 + 应该多用printf取代echo，echo存在一定的兼容性风险。
-{% hightlight bash %}
+{% highlight bash %}
 $ printf "color : #%02x%02x%02x \n" 255 255 255
 color : #ffffff 
 {% endhighlight%}
 
 + shell文件头，一些常用注释，签名
-{% hightlight bash %}
+{% highlight bash %}
 #!/bin/bash
 #: Title                  : print formate head
 #: Date                   : 2014-03-06
@@ -138,7 +138,7 @@ printf "%${column_width}s\n" $divider
 
 {% endhighlight%}
 
-{% hightlight bash %}
+{% highlight bash %}
 $ print_head 
 #!/bin/bash
 ############################################################
@@ -155,19 +155,19 @@ $ print_head
 + shell中重定向，可以使用`&> FILE`和`＆>> FILE`将标准输出和错误输出都导向到一个文件中
 
 + 输出随机数`${RANDOM}`
-{% hightlight bash %}
+{% highlight bash %}
 $ printf "%s\n" ${RANDOM}
 24640
 {% endhighlight%}
 
 + 保持子shell的输出
-{% hightlight bash %}
+{% highlight bash %}
 $ DATE=`date`
 $ DATE=$( date )
 {% endhighlight%}
 
 + 使用printf保存变量
-{% hightlight bash %}
+{% highlight bash %}
 $ printf -v DATA "%s" $( date ) 
 $ echo $DATA
 2014年03月06日星期四17:29:16CST
@@ -175,7 +175,7 @@ $ echo $DATA
 
 
 + 在shell的参数中以空格换行作为分割符，单引号和双引号都可以将空格包含在一个参数内，其中双引号支持换行,单引号内不能包含单引号，单引号内都被当作直接的字符，但是`$''`则可以包含转义的单引号和字符。
-{% hightlight bash %}
+{% highlight bash %}
 $ echo 'abcde\'
 abcde\
 $ echo $'abcde\''
@@ -186,7 +186,7 @@ $ echo $'\'line1\'\n\'line2\''
 {% endhighlight%}
 
 + 花括号参数，不是标准的参数形式，但支持一些特殊的功能
-{% hightlight bash %}
+{% highlight bash %}
 $ sa {one,two,three}
 :one:
 :two:
@@ -226,7 +226,7 @@ $ sa {1..20..5}
 {% endhighlight%}
 
 + shell参数支持`~` 主要是用户目录。
-{% hightlight bash %}
+{% highlight bash %}
 $ sa ~
 :/home/qinshulei:
 $ sa ~qinshulei
@@ -236,7 +236,7 @@ $ sa ~root
 {% endhighlight%}
 
 + shell参数支持数学计算，使用`$(( expression ))`
-{% hightlight bash %}
+{% highlight bash %}
 $ sa $(( 1+2 )) $((1+2)) $((10/5)) $((10%5)) "$((6-9))kkk"
 :3:
 :3:
@@ -246,14 +246,14 @@ $ sa $(( 1+2 )) $((1+2)) $((10/5)) $((10%5)) "$((6-9))kkk"
 {% endhighlight%}
 
 + 使用`$( )`实现内部执行命令
-{% hightlight bash %}
+{% highlight bash %}
 $ printf "abc %s adc\n" $( date +%Y-%m-%d ).log
 abc 2014-03-07.log adc
 {% endhighlight%}
 
 
 + 变量同样应该再两边加引号，不然有空格回车就会被分割
-{% hightlight bash %}
+{% highlight bash %}
 $ var="this is  a multiword value"
 $ sa $var "$var"
 :this:
@@ -265,7 +265,7 @@ $ sa $var "$var"
 {% endhighlight%}
 
 + `IFS`:internal field separator variable.默认情况下`IFS= \t\n`.只对变量有效,其作用就是用来对变量在做参数时根据分割符自动分割。
-{% hightlight bash %}
+{% highlight bash %}
 $ IFS=' :'
 $ sa qsdk:hi:gg:::
 :qsdk:hi:gg::::
@@ -280,13 +280,13 @@ $ sa $var
 
 
 + shell的参数若不加引号，并且使用通配符，则会自动匹配目录下的文件
-{% hightlight bash %}
+{% highlight bash %}
 $ sa t*
 :test:
 {% endhighlight%}
 
 + 将命令的输出作为输入`<()`
-{% hightlight bash %}
+{% highlight bash %}
 $  ls -l | while read tmp
 > do
 > printf "%s\n" "${tmp}"
@@ -301,7 +301,7 @@ total 20
 
 
 + 计算字符串长度
-{% hightlight bash %}
+{% highlight bash %}
 $ expr length "abcde"
 5
 {% endhighlight%}
@@ -313,7 +313,7 @@ $ expr length "abcde"
 + `|` 和`()`都会进入子shell执行，而子shell的变量是不会传给父shell的。所以这里要留心。
 
 + read和IFS有个特殊写法，就是直接在行首定义IFS，然后这个变量只作用与当前行.
-{% hightlight bash %}
+{% highlight bash %}
 printf "%s" $IFS | od -b
 printf "begin\n"
 while IFS=: read login a b c name e; do
@@ -328,14 +328,14 @@ printf "end\n"
 {% endhighlight%}
 
 + 设置变量默认值.`${var:-default}`当字符为空或未设置设置默认值。 `${var-default}`只当未设置设置默认值。 `${var:+alternate}`只当字符设置，设置为默认值 `${var+alternate}` 当字符设置或者为空，设置默认值. 
-{% hightlight bash %}
+{% highlight bash %}
 $ var=
 $ sa "${var:-default}"
 :default:
 {% endhighlight%}
 
 第一个字符为空，所以就不会加空格。
-{% hightlight bash %}
+{% highlight bash %}
 for n in a b c d e f;do
 > var="${var:+"$var "}$n"
 > done
@@ -345,26 +345,26 @@ qinshulei@qinshulei:~/bpl/bin$ sa "${var}"
 {% endhighlight%}
 
 + `${var:?message}`,如果未设置值，报错。`${var:=default}`与`${var:-default}`类似。但会输出
-{% hightlight bash %}
+{% highlight bash %}
 ${1:? an argument is required} #必须输入一个参数的判断
 {% endhighlight%}
 
 + `${#var}`显示变量长度。
-{% hightlight bash %}
+{% highlight bash %}
 $ var="1234567"
 $ printf "%s\n" ${#var}
 7
 {% endhighlight%}
 
 + `${var%PATTERN}` 去除结尾匹配的字符。shell真变态，搞这么多变量的语法。。。。。 `${var%%PATTERN}` 去掉结尾匹配最长的串.`${var#PATRERN}`去掉开始匹配的最短串，`${var##PATRERN}`去掉开始匹配的最长串
-{% hightlight bash %}
+{% highlight bash %}
 $ var="tttggg"
 $ var=${var%g??}
 $ printf "%s\n" $var
 ttt
 {% endhighlight%}
 取出参数中的目录
-{% hightlight bash %}
+{% highlight bash %}
 case $1 in
     */*) printf "%s\n" "${1%/*}" ;;
     *) [ -e "$1" ] && printf "%s\n" "$PWD" || echo '.' ;;
@@ -372,4 +372,233 @@ esac
 {% endhighlight%}
 
 
++ `${var//PATTERN/STRING}`替换所有符合规则的字串
+{% highlight bash %}
+$ password=abcdedf
+$ printf "%s\n" "${password//?/*}"
+*******
+{% endhighlight%}
 
++ `${var:OFFSET:LENGTH}`返回指定长度的子串
+{% highlight bash %}
+$ password=abcdedf
+$ printf "%s\n" "${password:1:2}"
+bc
+{% endhighlight%}
+
++ `${!var}` 直接返回字符内容对应的变量的内容
+{% highlight bash%}
+$ x=yes
+$ a=x
+$ printf "%s\n" "${!a}"
+yes
+{% endhighlight %}
+
++ `${var^}` `${var^^}` 返回大写内容，第一个只转化部分，第二个全部,同样可以返回小写`${var,}` `${var,,}`
+{% highlight bash%}
+$ var=testvalue
+$ printf "%s\n" "${var^}"
+Testvalue
+$ printf "%s\n" "${var^[a-z]}"
+Testvalue
+$ printf "%s\n" "${var^^[a-z]}"
+TESTVALUE
+$ printf "%s\n" "${var^^}"
+TESTVALUE
+
+$ var=UPERCASE
+$ printf "%s\n" "${var,}"
+uPERCASE
+$ printf "%s\n" "${var,,}"
+upercase
+{% endhighlight %}
+
++ 遍历所有参数，执行shell
+{% highlight bash%}
+for param in "$@"
+do
+    #do something
+done
+
+while [ $# -gt 0 ]
+do
+    #do somethings
+    shift
+done
+
+{% endhighlight %}
+
+
+
++ 数组的使用 ,使用括号可以快速初始化，使用井号可以查看对于个数,使用`+=`可以合并其他数组
+{% highlight bash%}
+$ boys=( shulei jiajia xx )
+$ printf "%s\n" "${#boys[*]}"
+3
+$ printf "%s\n" "${boys[0]}"
+shulei
+$ printf "%s\n" "${boys[1]}"
+jiajia
+$ printf "%s\n" "${boys[2]}"
+xx
+$ boys[${#boys[*]}]=dahuang
+$ printf "%s\n" "${boys[3]}"
+dahuang
+$ printf "%s\n" "${boys[@]}"
+shulei
+jiajia
+xx
+dahuang
+
+$ boys+=( xiegongzhi chenxunshi )
+$ printf "%s\n" "${boys[@]}"
+shulei
+jiajia
+xx
+dahuang
+xiegongzhi
+chenxunshi
+{% endhighlight %}
+
+
++ 字符数组
+{% highlight bash%}
+$ declare -A array
+$ array[shulei]=lv1
+$ array[jiajia]=lv2
+$ printf "%s\n" "${array[@]}"
+lv2
+lv1
+$ printf "%s\n" "${array[jiajia]}"
+lv2
+{% endhighlight %}
+
+
++ 解析ip地址
+{% highlight bash%}
+$ ip=192.168.1.1
+$ ips=( ${ip//./ } )
+$ printf "%s\n" "${ips[@]}"
+192
+168
+1
+1
+{% endhighlight %}
+
+
+{% highlight bash%}
+isvalidip()
+{
+    case $1 in
+        "" | *[!0-9.]* | *[!0-9])
+            return 1;;
+    esac
+
+
+    local IFS=.
+    set -- $1
+    
+    [ $# -eq 4 ]&&[ ${1:-666} -le 255 ]&&[ ${2:-666} -le 255 ]&&[ ${3:-666} -le 255 ]&&[ ${4:-666} -le 255 ]
+}
+
+for ip in 127.0.0.1 168.260.0.234 1.2.3.4
+do
+    if isvalidip "$ip"
+    then
+        printf "%15s: valid\n" "$ip"
+    else
+        printf "%15s: invalid\n" "$ip"
+    fi
+done
+
+###################################################################
+$ isvalidip 
+      127.0.0.1: valid
+  168.260.0.234: invalid
+        1.2.3.4: valid
+{% endhighlight %}
+
+
++ shell的函数，内容体可以是`()` `{}` `for case until while`等任意一个具有作用域的关键词，但是其效果肯定是有不同的，比如`()`必然只能作用与子进程，修改不会影响当前进程
+
++ `set -- `替换参数,可以配合IFS实现灵活的替换。
+
++ 遍历变量字符串中的字符,相当的hack啊，，真心无语
+{% highlight bash%}
+while [ -n "$var" ]
+do
+    temp=${var#?}
+    char=${var%"$temp"}
+    # do some thing
+    var=$temp
+done
+{% endhighlight %}
+
++ shell字符串去空格trim
+{% highlight bash%}
+_trim()
+{
+    local trim_string
+    _TRIM=$1
+    trim_string=${_TRIM##*[!${2:- }]}
+    _TRIM=${_TRIM%"$trim_string"}
+    trim_string=${_TRIM%%[!${2:- }]*}
+    _TRIM=${_TRIM#"$trim_string"}
+}
+
+trim()
+{
+    _trim "$@" && printf "%s\n" "$_TRIM"
+}
+
+{% endhighlight %}
+
++ shell的index 函数
+{% highlight bash%}
+_index()
+{
+    local idx
+    case $1 in
+        "") _INDEX=0; return 1
+            ;;
+        *"${2}"*) idx=${1%%"$2"*}
+            _INDEX=$(( ${#idx} + 1)) 
+            ;;
+        *) _INDEX=0; return 1 ;;
+    esac
+}
+
+index()
+{
+    _index "$@"
+    printf "%d\n" "$_INDEX"
+}
+
+{% endhighlight %}
+
+
++ bash 读取文件
+{% highlight bash%}
+while read  #no name default REPLY
+do
+    #do something
+
+done < ${file}
+
+{% endhighlight %}
+
+
++ `?(pattern-list)` 0个或者1个匹配实例。`*(pattern-list)` 0个或者多个匹配。 `@(pattern-list)` 单个匹配  。`+(pattern-list)`  多个匹配。`！(pattern-list)`不匹配的。
+
+
+
++ 递归显示
+{% highlight bash%}
+$ ls **
+bin:
+alert  dname  isvalidip  parseopts  print_head  readuser  sa  special_parameters  string_lib  test  trim
+
+scripts:
+{% endhighlight %}
+
++ time 重定向问题。time不会被重定向是因为他是bash的内置命令。要想重定向需要使用括号，括起来。

@@ -7,7 +7,7 @@ tages: jenkins
 ---
 
 + jenkins 支持rest api，有多种方式。最便利的一种是xml的方式。比如要查询最后某个job一次build的号。可以向下面这样写
-{% hightlight bash %}
+{% highlight bash %}
 curl -s "http://android-ci-platform.cnbj.sonyericsson.net/job/cm_auto_rebase_superlabel_kk-lagan-docomo/api/xml?xpath=/*/lastBuild/number" > buildnum.tmp
 len=$( cat buildnum.tmp | xargs expr length )
 index=$(( ${len} - 9 ))
