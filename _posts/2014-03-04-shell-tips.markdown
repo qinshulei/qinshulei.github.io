@@ -602,3 +602,97 @@ scripts:
 {% endhighlight %}
 
 + time 重定向问题。time不会被重定向是因为他是bash的内置命令。要想重定向需要使用括号，括起来。
+
+
+ `eval`进行执行结果的结果
+{% highlight bash%}
+$ x=yes
+$ a=x
+$ eval "sa \"\$$a\""
+:yes:
+{% endhighlight %}
+
+{% highlight bash%}
+$ eval "$(date "+year=%Y month=%m day=%d hour=%H minute=%M second=%S")"
+$ echo $year
+2014
+{% endhighlight %}
+
++ 搜索命令执行的路径
+{% highlight bash%}
+$which echo
+/bin/echo
+$ type sa
+sa is hashed (./sa)
+{% endhighlight %}
+
+
++ 注意，判断条件中对变量进行判断，一定要用引号引起来。否则它不会将变量当作字符串
+{% highlight bash%}
+#显然下面这个变量位定义，但是仍然为真，就是这个原因
+$ [ -n $tsdfafas ] && printf "%s\n" "test"
+test
+
+#下面是正确的行为
+$ test=test
+$ [ -n "$test" ] && printf "%s\n" "test"
+test
+
+{% endhighlight %}
+
+
++ 用`bash -n COMMAND`可以先测试一下命令的语法，结构等，这样可以提前解决一些问题。 然后再shell里面重定向输出不能有空格`>&2`.使用 `set -x` 可以打开命令的回显，更方便调用.设置PS4可以调整打印命令的内容,比如显示执行命令的行数`export PS4='+ $LINENO: '`.`set -u` 将unboud value 当成是错误。这样很多问题更容易暴露
+
+
++ 目录管理，常用的目录控制命令是`cd` ，并且`cd -` 可以返回上一次的目录，更强大的目录管理是`pushd` ,`popd` 使用堆栈管理目录，保存与变量`DIRSTACK`
+
+
++ 目录管理中，使用内置命令`dirs -l -p`可以显示DIRSTACK中的目录扩展特殊字符并且按行显示。
+
++ `eval "${!num#*:}"` 这句确实厉害，执行一个变量内容的内容的命令
+
+
++ `ctrl + L` 清屏幕，等同与`clear`
+
++ `less` 增强的结果显示，可以前进后退
+
++ shell的配置文件最好能被直接`source`，这样设置的变量就可以直接运行到环境中来,即配置直接写成shell代码
+
+
++ shell中array可以在中途reset掉，遍历的方法是使用`${array[@]}`.使用`${!array[@]}`可以遍历index.
+
+
++ bash 读取文件`mapfile -t array < "$kjv"` 或者 `array=( < "$kjv")`
+
++ pro bash 最后几章讲解了shell中的图形操作，键盘交互，暂时用不到我就一略而过。但若是想要使用shell编写高交互的东西，可以去参考一下。
+
++ shell 可以操作命令列表 `history -c` 清空历史.`history -s` 保存命令。
+
++ 一些变量
+{% highlight bash%}
+## bash path
+$ echo $BASH
+/bin/bash
+
+## bash pid
+$ echo $$
+5154
+$ echo $BASHPID
+5154
+
+## bash version
+$ echo $BASH_VERSION
+4.2.25(1)-release
+
+## parent PID
+$ echo $PPID
+5042
+
+## return random number
+$ echo $RANDOM
+6780
+
+$ echo $LANG
+en_US.UTF-8
+{% endhighlight %}
+
