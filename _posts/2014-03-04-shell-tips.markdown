@@ -696,3 +696,4 @@ $ echo $LANG
 en_US.UTF-8
 {% endhighlight %}
 
++ shell的方法返回值可以用return,if语句会直接取return值作判断。但是若是想对return值取反，可行的办法可能还是只有用test命令，只能再对`$?`进行判断，判断`[ $? != 0 ]`.另一种可行的办法就是使用`$()`，取输出的结果。当然在方法中就不使用return了，全都默认为成功。用echo输出成功失败，也就是y或者n，然后再用test去判断。
