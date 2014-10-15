@@ -1,0 +1,46 @@
+---
+layout: post
+title:  "learn svn"
+date:   2014-04-17 10:54:31
+categories: svn
+tages: svn
+---
+
++ svn web管理工具，
+{% highlight bash %}
+1.  Userfriendly SVN (USVN) 
+http://www.usvn.info/
+
+2.  svnmanager
+http://svnmanager.sourceforge.net/
+
+3. Submin
+http://supermind.nl/submin/
+
+4.  svn-access-manager
+http://sourceforge.net/projects/svn-access-mana/
+{% endhighlight %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

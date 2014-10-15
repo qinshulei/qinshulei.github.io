@@ -1,0 +1,155 @@
+---
+layout: post
+title:  "java使用zip压缩文件名乱码问题"
+date:   2014-10-15 15:33:30
+categories: java
+tages: java
+---
+
+使用原生的java zip库还是有问题，即便使用java7.
+解决方案是使用ant.jar中的zip库
+```java
+import org.apache.tools.zip.ZipEntry;
+import org.apache.tools.zip.ZipOutputStream;
+import org.apache.tools.zip.ZipOutputStream.UnicodeExtraFieldPolicy;
+
+
+public class ArchiveDownloadServlet extends AbstractServlet {
+//.....
+protected void executeSVNOperation(IDataProvider dataProvider, State state)
+			throws SVNWebClientException {
+		AbstractRequestHandler requestHandler = this.getRequestHandler(state
+				.getRequest());
+
+		// init
+		long revision;
+		String url;
+		if (requestHandler.getCurrentRevision() != -1) {
+			revision = requestHandler.getCurrentRevision();
+		} else {
+			revision = dataProvider.getHeadRevision();
+		}
+		String strUrl = requestHandler.getUrl();
+		if (strUrl.length() > 0 && !strUrl.endsWith("/"))
+			strUrl = strUrl + '/';
+
+		if (requestHandler.getPegRevision() != -1) {
+			strUrl = dataProvider.getLocation(requestHandler.getUrl(),
+					requestHandler.getPegRevision(), revision);
+		}
+		url = strUrl;
+		DataRepositoryElement info = dataProvider.getInfo(url, revision);
+
+		// execute
+		ZipOutputStream zos = null;
+		try {
+			String encoding = configurationProvider.getZipEncoding();
+			String defaultEncoding = configurationProvider.getDefaultEncoding();
+
+			try {
+				String tmp = "";
+				tmp.getBytes(encoding);
+			} catch (UnsupportedEncodingException ue) {
+				Logger.getLogger(this.getClass()).error(ue, ue);
+				encoding = "ISO-8859-1";
+			}
+
+			try {
+				String tmp = "";
+				tmp.getBytes(defaultEncoding);
+			} catch (UnsupportedEncodingException ue) {
+				Logger.getLogger(this.getClass()).error(ue, ue);
+				defaultEncoding = "ISO-8859-1";
+			}
+
+			if (state.getRequest().getHeader("User-Agent") != null) {
+				String userAgent = state.getRequest().getHeader("User-Agent");
+				if (userAgent.indexOf("Linux") > -1) {
+					encoding = "UTF-8";
+					defaultEncoding = "UTF-8";
+				} else if (userAgent.indexOf("Win32") > -1 || userAgent.indexOf("Windows") > -1){
+					encoding = "GBK";
+					defaultEncoding = "GBK";
+				}
+			}
+
+			HttpServletResponse response = state.getResponse();
+			OutputStream out = response.getOutputStream();
+
+			zos = new ZipOutputStream(out);
+			zos.setMethod(ZipOutputStream.DEFLATED);
+			zos.setEncoding(encoding);
+
+
+			if (encoding.equals("UTF-8")) {
+				 zos.setCreateUnicodeExtraFields(UnicodeExtraFieldPolicy.ALWAYS);
+			}
+
+			String mimeType = "application/octet-stream";
+			response.setContentType(mimeType);
+
+			String fileName = info.getName();
+			fileName = fileName + "-r" + Long.toString(info.getRevision())
+					+ ".zip";
+
+			String zipnameEncoding = ContentEncodingHelper.getEncoding(state,
+					defaultEncoding);
+
+			fileName = new String(fileName.getBytes(zipnameEncoding),
+					"ISO-8859-1");
+
+			if (state.getRequest().getHeader("User-Agent") != null) {
+				if (state.getRequest().getHeader("User-Agent").indexOf("MSIE") < 0) {
+					fileName = "\"" + fileName + "\"";
+				}
+			}
+			response.setHeader("Content-Disposition", "attachment; filename="
+					+ fileName);
+
+			DataDirectoryElement dir = dataProvider.getDirectory(url, revision,
+					false);
+			this.processFolder(dataProvider, zos, dir, "", url);
+
+			zos.flush();
+		} catch (Exception ie) {
+			throw new SVNWebClientException(ie);
+		} finally {
+			if (zos != null) {
+				try {
+					zos.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+	}
+
+//...
+}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

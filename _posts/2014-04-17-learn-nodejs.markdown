@@ -112,6 +112,48 @@ function loadUsers(userIds, load, done) {
 {% endhighlight %}
 
 
++ js ,超级变态的调用方式
+{% highlight javascript %}
+function curryN(fn, n) {
+    if (typeof n !== 'number') n = fn.length
+    
+    function getCurriedFn(prev)
+    {
+        return function(arg) {
+            var args = prev.concat(arg)
+            if (args.length < n) return getCurriedFn(args)
+            else return fn.apply(this, args)
+        };
+    }
+
+    return getCurriedFn([]);
+}
+
+module.exports = curryN
+
+{% endhighlight %}
+
++ 更加变态的调用，简直不能理解
+{% highlight javascript %}
+// Explained:
+// The value of `this` in Function.call is the function
+// that will be executed.
+//
+// Bind returns a new function with the value of `this` fixed
+// to whatever was passed as its first argument.
+//
+// Every function 'inherits' from Function.prototype,
+// thus every function, including call, apply and bind 
+// have the methods call apply and bind.
+//
+// Function.prototype.call === Function.call
+module.exports = Function.call.bind(Array.prototype.slice)
+{% endhighlight %}
+
+
+
+
+
 
 [maplink]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 [filterlink]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
