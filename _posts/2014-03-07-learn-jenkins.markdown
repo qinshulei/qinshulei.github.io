@@ -2,6 +2,7 @@
 layout: post
 title:  "jenkins tips"
 date:   2014-03-07 16:15:37
+description:  "jenkins tips"
 categories: jenkins
 tages: jenkins
 ---

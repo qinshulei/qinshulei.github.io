@@ -2,6 +2,7 @@
 layout: post
 title:  "记录一下博客的搭建"
 date: 2013-08-22 23:57:23
+description : jekyll建站的一些网站
 categories: blog
 ---
 ### 安装ruby ###

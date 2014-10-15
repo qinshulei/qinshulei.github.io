@@ -2,6 +2,7 @@
 layout: post
 title:  "learn node.js"
 date:   2014-04-17 10:54:31
+description:  "learn node.js"
 categories: nodejs
 tages: nodejs
 ---

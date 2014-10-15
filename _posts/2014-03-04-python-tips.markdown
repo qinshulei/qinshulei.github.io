@@ -2,6 +2,7 @@
 layout: post
 title:  "python 学习"
 date:   2014-03-04 09:56:01
+description:  "python 学习"
 categories: linux python
 tages: python
 ---

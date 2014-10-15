@@ -2,6 +2,7 @@
 layout: post
 title:  "makefile tips"
 date:   2014-01-22 15:35:06
+description:  "makefile tips"
 categories: linux
 tages: linux
 ---

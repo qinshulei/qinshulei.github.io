@@ -21,6 +21,17 @@ body{
 /* Home
 /*
 /*****************************************************************************/
+div.posts-list .post {
+    width: 100%;
+    height: auto;
+    background: #f6f6f6;
+    padding:50px;
+}
+div.posts-list .post:nth-child(2n) {
+    background: #fff;
+}
+
+
 ul.posts {
   list-style-type: none;
   margin-bottom: 2em;

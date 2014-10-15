@@ -2,6 +2,7 @@
 layout: post
 title:  "linux shell tips"
 date:   2014-01-20 10:14:55
+description:  "linux shell tips"
 categories: linux
 tages: linux
 ---

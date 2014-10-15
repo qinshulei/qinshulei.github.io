@@ -2,6 +2,7 @@
 layout: post
 title:  "android project git tools"
 date:   2014-03-11 15:41:54
+description:  "android project git tools"
 categories: android git tools
 tages: android
 ---

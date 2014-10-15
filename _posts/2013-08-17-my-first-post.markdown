@@ -2,6 +2,7 @@
 layout: post
 title:  "第一个页面!"
 date:   2013-08-17 23:55:53
+description : 运行jekyll serve 的时候设置环境变量，解决编码问题:...
 categories: test
 tages: test
 ---

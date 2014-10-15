@@ -2,6 +2,7 @@
 layout: post
 title:  "linux 网络命令"
 date:   2014-01-18 09:33:20
+description: linux 网络命令
 categories: linux
 tages: linux
 ---

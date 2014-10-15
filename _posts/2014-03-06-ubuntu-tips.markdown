@@ -2,6 +2,7 @@
 layout: post
 title:  "ubuntu tips"
 date:   2014-03-06 10:02:51
+description:  "ubuntu tips"
 categories: linux shell ubuntu
 tages: shell
 ---
