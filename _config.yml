@@ -1,5 +1,5 @@
 name: qin shulei
 markdown: redcarpet
-highlighter: true
+highlighter: pygments 
 timezone: Asia/Shanghai
 paginate: 4
