@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "java使用zip压缩文件名乱码问题"
+title:  "Java使用zip压缩文件名乱码问题"
 date:   2014-10-15 15:33:30
 description : 使用java原生的库压缩文件遇到中文会出现乱码,通过实验,使用ant.jar的api可以解觉这个问题.
 categories: java
 tages: java
 ---
 
-+ 使用原生的java zip库还是有问题，即便使用java7.
+#### 使用原生的java zip库还是有问题，即便使用java7.
 解决方案是使用ant.jar中的zip库
 
 {% highlight java %}

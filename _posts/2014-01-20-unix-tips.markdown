@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "linux shell tips"
+title:  "Linux Shell Tips"
 date:   2014-01-20 10:14:55
 description:  "linux shell tips"
 categories: linux
 tages: linux
 ---
 
-+ 普通删除不能删除目录，删除目录要加`-rf`，其中r指递归recursive，f指强制force。
+#### 普通删除不能删除目录，删除目录要加`-rf`，其中r指递归recursive，f指强制force。
 {% highlight bash %}
 $ rm -rf directory
 {% endhighlight %}
@@ -23,7 +23,7 @@ $ echo $?
 
 
 
-+ 与删除类似，当建一个已经存在的目录时，应当加入`-p`选项。关闭出错信息。
+#### 与删除类似，当建一个已经存在的目录时，应当加入`-p`选项。关闭出错信息。
 {% highlight bash %}
 qinshulei@qinshulei:~/tmp$ ls
 dtmp  redmine_data  result-dir  test.sh  test_up.sh  tmp
@@ -38,7 +38,7 @@ qinshulei@qinshulei:~/tmp$ echo $?
 
 
 
-+ shell的判断条件,其实就是使用test命令，若使用[]作为判断语句，要小心空格，内部不留空格会有问题。
+#### shell的判断条件,其实就是使用test命令，若使用[]作为判断语句，要小心空格，内部不留空格会有问题。
 {% highlight bash %}
 qinshulei@qinshulei:~/tmp$ test -n "$dontexitvar"
 qinshulei@qinshulei:~/tmp$ echo $?
@@ -52,7 +52,7 @@ qinshulei@qinshulei:~/tmp$ [-n "$dontexitvar"]
 其中对`-n`，`-z`对字符串的比较，最好在字符串两边加引号.
 在组合表达式中`-a`为 and,`-o`为 or,`!` 为 not.
 
-+ 字符串判断
+#### 字符串判断
  - `str1 = str2`　　　　　　当两个串有相同内容长度时为真 
  - `str1 != str2`　　　　　 当串str1和str2不等时为真 
  - `-n str1`　　　　　　　 当串的长度大于0时为真(串非空) 
@@ -60,7 +60,7 @@ qinshulei@qinshulei:~/tmp$ [-n "$dontexitvar"]
  - `str1`　　　　　　　　   当串str1为非空时为真
 
 
-+ 数字的判断
+#### 数字的判断
  - `int1 -eq int2`　　　　两数相等为真 
  - `int1 -ne int2`　　　　两数不等为真 
  - `int1 -gt int2`　　　　int1大于int2为真 
@@ -69,7 +69,7 @@ qinshulei@qinshulei:~/tmp$ [-n "$dontexitvar"]
  - `int1 -le int2`　　　　int1小于等于int2为真
 
 
-+ 文件的判断
+#### 文件的判断
  - `-r file`　　　　　用户可读为真 
  - `-w file`　　　　　用户可写为真 
  - `-x file`　　　　　用户可执行为真 
@@ -82,39 +82,39 @@ qinshulei@qinshulei:~/tmp$ [-n "$dontexitvar"]
  - `-e file`         判断文件是否存在
 
 
-+ 复杂逻辑判断
+#### 复杂逻辑判断
  - `-a` 　 　　　　　 与 
  - `-o`　　　　　　　 或 
  - `!`　　　　　　　　非
 
 
-+ 远程复制scp，从其他机器拷贝资料
+#### 远程复制scp，从其他机器拷贝资料
 {% highlight bash %}
 qinshulei@qinshulei:~$ scp .ssh/id_rsa.pub  tangjiajia@192.168.65.88:/home/tangjiajia/test
 tangjiajia@192.168.65.88's password: 
 id_rsa.pub                                                                                                                                                                 100%  401     0.4KB/s   00:00   
 {% endhighlight %}
 
-+ 查询机器核心数目:
+#### 查询机器核心数目:
 {% highlight bash %}
 $ grep "^processor" /proc/cpuinfo | wc -l
 4
 {% endhighlight %}
 
-+ 简单计算
+#### 简单计算
 {% highlight bash %}
 $ expr 1 + 1
 2
 {% endhighlight %}
 
 
-+ 后台运行程序
+#### 后台运行程序
 {% highlight bash %}
 $ nohup cmd 2>&1 1>xx.out &
 {% endhighlight %}
 
 
-+ 杀死nohup的进程
+#### 杀死nohup的进程
 {% highlight bash %}
 $ ps -ef | grep command
 $ kill -9 pid

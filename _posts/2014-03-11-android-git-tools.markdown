@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "android project git tools"
+title:  "Android Project Git Tools"
 date:   2014-03-11 15:41:54
 description:  "android project git tools"
 categories: android git tools
 tages: android
 ---
 
-+ 今天遇到了一个需求，统计指定的committer提交的改动的文件。这是一个很常见的需求。实现也很简单，就是使用`git log`，并用committer作为筛选条件。其中使用format选项可以将不要的内容都不显示。然后使用sed命令去空格。最后在用sort去掉重复项。
+#### 今天遇到了一个需求，统计指定的committer提交的改动的文件。这是一个很常见的需求。实现也很简单，就是使用`git log`，并用committer作为筛选条件。其中使用format选项可以将不要的内容都不显示。然后使用sed命令去空格。最后在用sort去掉重复项。
 {% highlight bash %}
 #!/bin/bash
 #: Title                  : query changes by committer
@@ -134,7 +134,7 @@ mv ~/query_changes_by_author_tmp.log "${filename}"
 printf "the out file is %s\n" "${filename}"
 {% endhighlight %}
 
-+ 然后生产的数据距离可读还是有距离的，这里进一步处理，我使用的是python，用shell也可以，就是用awk，不过我觉得用python和awk差别不大。相比而言用python也更舒服.
+#### 然后生产的数据距离可读还是有距离的，这里进一步处理，我使用的是python，用shell也可以，就是用awk，不过我觉得用python和awk差别不大。相比而言用python也更舒服.
 {% highlight python%}
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
@@ -188,4 +188,3 @@ for key in dicts.keys():
 {% endhighlight %}
 
 
-  

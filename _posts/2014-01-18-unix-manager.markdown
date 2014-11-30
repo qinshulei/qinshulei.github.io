@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "linux 管理命令"
+title:  "Linux 管理命令"
 date:   2014-01-18 11:15:26
 description: linux 管理命令"
 categories: linux
 tages: linux
 ---
 
-+ 磁盘管理
+#### 磁盘管理
 df : disk free
 du : disk usage
 {% highlight bash %}
@@ -48,12 +48,12 @@ $ du -sh qsl
 {% endhighlight %}
 统计目录磁盘占用du要加`-c`或者`-s`参数,`-h` 使用单位显示
 
-+ 找出目录下最大的文件
+#### 找出目录下最大的文件
 {% highlight bash %}
 $ find . -type f -exec du -k {} \; | sort -nrk 1 | head
 {% endhighlight %}
 
-+ 打印命令执行时间
+#### 打印命令执行时间
 {% highlight bash %}
 $ time ls
 book               jdk-6u35-linux-x64.bin  make-4.0              semc_chain.pem                             skype-bin_4.2.0.11-0ubuntu0.12.04.2_i386.deb
@@ -65,7 +65,7 @@ user	0m0.000s
 sys	0m0.000s
 {% endhighlight %}
 
-+ 显示系统进程
+#### 显示系统进程
 {% highlight bash %}
 $ ps
   PID TTY          TIME CMD
@@ -73,7 +73,7 @@ $ ps
  6340 pts/3    00:00:00 ps
 {% endhighlight %}
 
-+ 显示系统进程及cpu占用率
+#### 显示系统进程及cpu占用率
 {% highlight bash %}
 ps -eo comm,pcpu | head
 COMMAND         %CPU
@@ -89,7 +89,7 @@ watchdog/0       0.0
 {% endhighlight %}
 
 
-+ 查看十个占用cpu最高的进程
+#### 查看十个占用cpu最高的进程
 {% highlight bash %}
 ps -eo comm,pcpu --sort -pcpu | head
 COMMAND         %CPU
@@ -104,7 +104,7 @@ chrome           0.1
 chrome           0.1
 {% endhighlight %}
 
-+ 查看可发出的信号
+#### 查看可发出的信号
 {% highlight bash %}
 $ kill -l
  1) SIGHUP	 2) SIGINT	 3) SIGQUIT	 4) SIGILL	 5) SIGTRAP
@@ -122,30 +122,30 @@ $ kill -l
 63) SIGRTMAX-1	64) SIGRTMAX	
 {% endhighlight %}
 
-+ 杀死某个进程
+#### 杀死某个进程
 {% highlight bash %}
 $ kill -9 pid
 {% endhighlight %}
 
-+ 查看某个命令的位置
+#### 查看某个命令的位置
 {% highlight bash %}
 $ which ls
 /bin/ls
 {% endhighlight %}
 
-+ 查看该命令位置及man帮助地址
+#### 查看该命令位置及man帮助地址
 {% highlight bash %}
 $ whereis git
 git: /usr/bin/git /usr/bin/X11/git /usr/share/man/man1/git.1.gz
 {% endhighlight %}
 
-+ 查看文件类型
+#### 查看文件类型
 {% highlight bash %}
 $ file jenkins.war 
 jenkins.war: Zip archive data, at least v2.0 to extract
 {% endhighlight %}
 
-+ 查看cpu信息
+#### 查看cpu信息
 {% highlight bash %}
 cat /proc/cpuinfo 
 processor	: 0
@@ -175,34 +175,34 @@ address sizes	: 36 bits physical, 48 bits virtual
 power management:
 {% endhighlight %}
 
-+ 定时关机,crontab定时执行任务
+#### 定时关机,crontab定时执行任务
 {% highlight bash %}
 $ crontab <<EOF
 > 00 01 * * * /sbin/shutdown -h
 > EOF
 {% endhighlight %}
 
-+ 显示所有定时任务
+#### 显示所有定时任务
 {% highlight bash %}
 $ crontab -l
 00 01 * * * /sbin/shutdown -h
 {% endhighlight %}
 
-+ 用户管理,用户信息存于`／etc/passwd`中,1-500 是系统预ID。500以上是普通用户.用户组通常用来描述用户详细信息。
+#### 用户管理,用户信息存于`／etc/passwd`中,1-500 是系统预ID。500以上是普通用户.用户组通常用来描述用户详细信息。
 {% highlight bash %}
 $  more /etc/passwd
 root:x:0:0:root:/root:/bin/bash
 qinshulei:x:1000:1000:qinshulei,,,:/home/qinshulei:/bin/bash
 {% endhighlight %}
 
-+ 用户密码存于`/etc/shadow`，快来破解我的密码。shadow采用DES加密方式，破解方式为暴力破解，可以采用字典攻击
+#### 用户密码存于`/etc/shadow`，快来破解我的密码。shadow采用DES加密方式，破解方式为暴力破解，可以采用字典攻击
 {% highlight bash %}
 sudo cat /etc/shadow
 [sudo] password for qinshulei:
 qinshulei:$6$xhw9lQPp$kiscnXnFi9b1Ue7HNw435J3bGGRixWUwY4c96PZyHSx2/0rFvTeMJu/Y7vtqT9LdYCNY2KM7E86ZKnX5TOeKH0:16080:0:99999:7:::
 {% endhighlight %}
 
-+ 创建组：
+#### 创建组：
 {% highlight bash %}
 $ sudo addgroup ccache
 [sudo] password for qinshulei: 
@@ -210,44 +210,44 @@ Adding group `ccache' (GID 1002) ...
 Done.
 {% endhighlight %}
 
-+ 创建用户
+#### 创建用户
 {% highlight bash %}
 $ sudo useradd ccache -g ccache -M
 #创建用户，并创建对应目录
 {% endhighlight %}
 
-+ 显示用户id及信息
+#### 显示用户id及信息
 {% highlight bash %}
 $ id
 uid=1000(qinshulei) gid=1000(qinshulei) groups=1000(qinshulei),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),124(sambashare)
 {% endhighlight %}
 
-+ 显示用户组信息。信息存于`/etc/group`
+#### 显示用户组信息。信息存于`/etc/group`
 {% highlight bash %}
 $ more /etc/group
 qinshulei:x:1000:
 {% endhighlight %}
 
-+ 修改用户信息
+#### 修改用户信息
 {% highlight bash %}
 $ sudo usermod -p 123456 qinsl0106
 {% endhighlight %}
 
 
-+ 删除用户
+#### 删除用户
 {% highlight bash %}
 sudo userdel -r ccache
 userdel: ccache home directory (/home/ccache) not found
 {% endhighlight %}
 
-+ 查看登录用户名
+#### 查看登录用户名
 {% highlight bash %}
 $ whoami
 qinshulei
 {% endhighlight %}
 
 
-+ 有两种方法通过shell提示信息。一个是`zenity`,一个是`notify-send`
+#### 有两种方法通过shell提示信息。一个是`zenity`,一个是`notify-send`
 {% highlight bash %}
 $ zenity --notification --text "work done"
 $ notify-send "complie" "done"

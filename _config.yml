@@ -1,5 +1,5 @@
-name: qin shulei
+name: QinShulei
 markdown: redcarpet
 highlighter: pygments 
 timezone: Asia/Shanghai
-paginate: 4
+paginate: 5

@@ -3,24 +3,28 @@ layout: default
 title: 书磊的首页
 ---
 <div>
-  <div class="page-header">
-
+  <div class="page-header text-center">
+    <h2>欢迎光临<small> 这里有一些我学习中的流水账~</small> </h2>
   </div>
+
   <div class="posts-list">
     {% for post in paginator.posts %}
     <div class="post">
-       <h3 class="post-title"><a href="{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a></h3>
-        <p class="post-meta"><time pubdate="{{ post.date | date_to_utc | date: '%Y-%m-%d' }}">{{ post.date | date_to_utc | date: "%Y-%m-%d" }}</time></p>
-        <div class="post-contant">
-            <p>{{ post.description }}</p>
-            <p class="post-more"><a href="{{ post.url }}" title="Read More" rel="nofollow">Read More</a></p>
-        </div>
+      <h3 class="post-title">
+        <a href="{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a>
+        <small class="post-meta"><time pubdate="{{ post.date | date_to_utc | date: '%Y-%m-%d' }}">{{ post.date | date_to_utc | date: "%Y-%m-%d" }}</time></small>
+        <small class="post-more pull-right"><a href="{{ post.url }}" title="Read More" rel="nofollow">Read More</a></small>
+      </h3>
+
+      <div class="post-contant">
+        <p>{{ post.description }}</p>
+      </div>
     </div>
     {% endfor %}
   </div>
 </div>
 
-<div id="post-pagination" class="pagination">
+<div id="post-pagination" class="pagination pull-right">
   <ul class="pages">
     <li class="page">
       {% if paginator.page == 1 %}
@@ -44,6 +48,6 @@ title: 书磊的首页
 
 <script>
   $(document).ready(function(){
-  $("#homelink").addClass("active");
+    $("#homelink").addClass("active");
   });
 </script>
