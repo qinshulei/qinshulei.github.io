@@ -2,7 +2,6 @@
 layout: post
 title:  "新的开始"
 date: 2014-01-07 19:44:53
-description : 新的开始
 categories: blog job
 ---
 

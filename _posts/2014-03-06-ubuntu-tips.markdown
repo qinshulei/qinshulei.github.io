@@ -2,7 +2,6 @@
 layout: post
 title:  "Ubuntu 系统管理"
 date:   2014-03-06 10:02:51
-description:  "ubuntu tips"
 categories: linux shell ubuntu
 tages: shell
 ---

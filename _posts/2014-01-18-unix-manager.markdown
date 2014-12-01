@@ -2,7 +2,6 @@
 layout: post
 title:  "Linux 管理命令"
 date:   2014-01-18 11:15:26
-description: linux 管理命令"
 categories: linux
 tages: linux
 ---

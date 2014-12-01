@@ -2,7 +2,6 @@
 layout: post
 title:  "我的比特币经历"
 date:   2014-01-09 23:44:05
-description: 我的比特币经历
 categories: test
 tages: test
 ---

@@ -10,11 +10,11 @@ title: 书磊的首页
   <div class="posts-list">
     {% for post in paginator.posts %}
     <div class="post">
-      <h3 class="post-title">
+      <h4 class="post-title">
         <a href="{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a>
         <small class="post-meta"><time pubdate="{{ post.date | date_to_utc | date: '%Y-%m-%d' }}">{{ post.date | date_to_utc | date: "%Y-%m-%d" }}</time></small>
         <small class="post-more pull-right"><a href="{{ post.url }}" title="Read More" rel="nofollow">Read More</a></small>
-      </h3>
+      </h4>
 
       <div class="post-contant">
         <p>{{ post.description }}</p>

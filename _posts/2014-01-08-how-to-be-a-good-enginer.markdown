@@ -2,7 +2,6 @@
 layout: post
 title:  "如何成为优秀的工程师"
 date: 2014-01-08 10:44:53
-description: "如何成为优秀的工程师"
 categories: blog job
 ---
 

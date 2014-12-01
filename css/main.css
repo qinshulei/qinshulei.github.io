@@ -40,6 +40,7 @@ div.posts-list .post {
     padding-bottom: 10px;
     padding-left : 20px;
     padding-right : 20px;
+    border: 1px solid #ddd;
 }
 
 div.posts-list .post .post-title a {
@@ -83,6 +84,9 @@ ul.posts span {
 #about{
     float:left;
     width:70%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding : 25px;
 }
 
 #me{
@@ -112,7 +116,7 @@ ul.posts span {
   /*
   /*****************************************************************************/
 .pagination p{
-    
+
 }
 
 .pagination ul li{
@@ -126,14 +130,11 @@ ul.posts span {
   /*****************************************************************************/
 
 /* standard */
+/*
 .post pre {
     border: 1px solid #ddd;
     background-color: #eef;
     padding: 0 .4em;
-}
-
-.post ul, .post ol {
-    margin-left: 1.35em;
 }
 
 .post code {
@@ -146,7 +147,7 @@ ul.posts span {
     border: none;
 }
 
-/* terminal */
+
 .post pre.terminal {
     border: 1px solid #000;
     background-color: #333;
@@ -155,4 +156,15 @@ ul.posts span {
 
 .post pre.terminal code {
     background-color: #333;
+}
+*/
+
+.post ul, .post ol {
+    margin-left: 1.35em;
+}
+
+#post-container {
+    background-color : #fff;
+    padding : 25px;
+    border: 1px solid #ddd;
 }
