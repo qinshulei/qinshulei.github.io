@@ -1,5 +1,7 @@
 name: QinShulei
+description: 秦书磊的个人博客
+url: http://www.qinshulei.cn
 markdown: redcarpet
-highlighter: pygments 
+highlighter: pygments
 timezone: Asia/Shanghai
 paginate: 5
