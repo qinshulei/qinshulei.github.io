@@ -1,0 +1,63 @@
+---
+layout: post
+title:  "以daemon方式启动emacs"
+date:   2014-12-03 10:52:39
+categories: emacs
+tages: emacs
+---
+
+将以下内容添加到`.zshrc`或者`.bashrc`，取决于你用什么`shell`
+
+{% highlight bash %}
+# alias emacs
+alias emacsd='emacs --daemon'
+alias e='emacsclient -t'
+alias ec='emacsclient -c'
+
+# run emacs daemon
+[[ -z $(ps -C 'emacs --daemon' -o pid=) ]] && emacsd
+
+# add kill emacs function
+function kill-emacs(){
+    emacsclient -e "(kill-emacs)"
+    emacs_pid=$( ps -C 'emacs --daemon' -o pid= )
+    if [[ -n "${emacs_pid}" ]];then
+        kill -9 "${emacs_pid}"
+    fi
+}
+{% endhighlight %}
+
+
+打开终端会自动运行`emacsd`启动`emacs daemon server`。后面都使用`ec`来编辑文件，使用`c`在终端编辑文件。
+
+`emacs daemon`模式下`emacs`会一直在后台以服务的方式运行，`ec`会启动一个客户端连接到这个服务。所以会非常快。
+
+当你插件非常多时，启动一次是很耗时的。我的`emacs daemon`启动一次大概要20s，但使用`ec`都是瞬开。
+
+关闭`emacs`,在终端调用`kill-emacs`即可。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
