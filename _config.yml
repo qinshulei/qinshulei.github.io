@@ -1,7 +1,44 @@
+# system setting
+markdown: kramdown
+kramdown:
+  input: GFM
+
+highlighter: pygments
+paginate: 6
+timezone: Asia/Shanghai
+exclude: ["README.md", "CNAME"]
+permalink: pretty
+
+# site setting
 name: QinShulei
 description: 秦书磊的个人博客
 url: http://www.qinshulei.cn
-markdown: redcarpet
-highlighter: pygments
-timezone: Asia/Shanghai
-paginate: 5
+about_url: /about/
+archive_url: /archive/
+rss_url: /atom.xml
+
+# personal setting
+author:
+  name: 秦书磊
+  email: 527072230@qq.com
+  segmentfault: http://segmentfault.com/u/qinshulei
+  weibo: http://weibo.com/qinshulei
+  github: https://github.com/qinshulei
+
+
+# default setting
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Qin Shulei"
+      category: "Linux"
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
