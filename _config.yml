@@ -17,6 +17,9 @@ about_url: /about/
 archive_url: /archive/
 rss_url: /atom.xml
 
+gems:
+  - jemoji
+
 # personal setting
 author:
   name: 秦书磊
