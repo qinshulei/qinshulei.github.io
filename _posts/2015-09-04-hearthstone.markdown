@@ -10,7 +10,7 @@ tages: game hearthstone
 
 前前后后也买了不少卡包了，因此目前三种卡包经典包 ， 地精包， 冠军包。最开始的时候开开包最少的收益最高，很明显。但开到后期，开哪个最合算就成了问题。当然直接开自己传说收集最少的应该错不到哪里去。不过我还是想认真考虑一下。
 
-那么首先是开一包的收益如何计算。我认为可以用实际获得的粉来计算。如果开出了自己没有的卡牌，那就是获得了对应卡牌合成价格的粉，如果开出了重复的那就是获得了，分解价值的粉。
+那么首先是开一包的收益如何计算。我认为可以用实际获得的粉来计算。如果开出了自己没有的卡牌，那就是获得了对应卡牌合成价格的粉，如果开出了重复的那就是获得了分解价值的粉。
 
 + 然后一张卡的类型概率如下：
 
@@ -63,17 +63,17 @@ tages: game hearthstone
 那么我们一包的期望收益就是:
 
 ```
-70% * (current_normal / total_normal) * 5  + 70% * (1 - current_normal / total_normal) * 40 +
+( 70% * (current_normal / total_normal) * 5  + 70% * (1 - current_normal / total_normal) * 40 +
 21.4% * (current_rare / total_rare) * 20 + 21.4% * (1 - current_rare / total_rare) * 100 +
-4.28% * (current_epic / total_epic) * 100 + 4.28% * (current_epic / total_epic) * 400 +
-1.08% * (current_legend / total_legend) * 400 + 1.08% * (current_legend / total_legend) * 1600 +
-1.47% * (current_gold_normal / total_gold_normal) * 50 + 1.47% * (current_gold_normal / total_gold_normal) * 400 +
-1.37% * (current_gold_rare / total_gold_rare) * 100 + 1.37% * (current_gold_rare / total_gold_rare) * 800 +
-0.308% * (current_gold_epic / total_gold_epic) * 400 + 0.308% * (current_gold_epic / total_gold_epic) * 1600 +
-0.111% * (current_gold_legend / total_gold_legend) * 1600 + 0.111% * (current_gold_legend / total_gold_legend) * 3200
+4.28% * (current_epic / total_epic) * 100 + 4.28% * (1 - current_epic / total_epic) * 400 +
+1.08% * (current_legend / total_legend) * 400 + 1.08% * (1 - current_legend / total_legend) * 1600 +
+1.47% * (current_gold_normal / total_gold_normal) * 50 + 1.47% * (1 - current_gold_normal / total_gold_normal) * 400 +
+1.37% * (current_gold_rare / total_gold_rare) * 100 + 1.37% * (1 - current_gold_rare / total_gold_rare) * 800 +
+0.308% * (current_gold_epic / total_gold_epic) * 400 + 0.308% * (1 - current_gold_epic / total_gold_epic) * 1600 +
+0.111% * (current_gold_legend / total_gold_legend) * 1600 + 0.111% * (1 - current_gold_legend / total_gold_legend) * 3200 ) * 5
 ```
 
-最后在附上目前三套卡的数量：
+然后是目前三套卡的数量：
 
 ```
 经典包
@@ -95,30 +95,38 @@ tages: game hearthstone
 传说：20张
 ```
 
-让我们见计算一下第一次开包的收益：
+让我们以经典包为例计算一下几个节点的收益
+
+第一次开包的收益：
 
 ```
-70%  * 40 + 21.4% * 100 + 4.28% * 400 + 1.08% * 1600 + 1.47% * 400 + 1.37% * 800 + 0.308% * 1600 + 0.111% * 3200 = 109.12
+( 70%  * 40 + 21.4% * 100 + 4.28% * 400 + 1.08% * 1600 + 1.47% * 400 + 1.37% * 800 + 0.308% * 1600 + 0.111% * 3200 ) * 5
+
+= 545.6
 ```
 
-让我们算一下普通蓝白卡齐全史诗和传说一张都没有以后开一包的收益吧：
+然后普通蓝白卡齐全史诗和传说一张都没有以后开一包的收益吧：
 
 ```
-70%  * 5 + 21.4% * 20 + 4.28% * 400 + 1.08% * 1600 + 1.47% * 400 + 1.37% * 800 + 0.308% * 1600 + 0.111% * 3200 = 67.5
+( 70%  * 5 + 21.4% * 20 + 4.28% * 400 + 1.08% * 1600 + 1.47% * 400 + 1.37% * 800 + 0.308% * 1600 + 0.111% * 3200 ) * 5
+
+= 337.5
 ```
 
 最后算一下全卡后的收益：
 
 ```
-70%  * 5 + 21.4% * 20 + 4.28% * 100 + 1.08% * 400 + 1.47% * 50 + 1.37% * 100 + 0.308% * 400 + 0.111% * 1600 = 21.493
+( 70%  * 5 + 21.4% * 20 + 4.28% * 100 + 1.08% * 400 + 1.47% * 50 + 1.37% * 100 + 0.308% * 400 + 0.111% * 1600 ) * 5
+
+= 107.465
 ```
 
-也就是说最开始开包的平均收益是一张稀有，蓝白卡齐全以后收益是一张半的普通。全卡后的收益只有半张普通。
+也就是说最开始开包的平均收益是五张稀有，蓝白卡齐全以后收益是三张稀有。全卡后的收益只有一张稀有。
 
-换一种眼光来看，第一次开包平均16包能获得等同于一张普通传说价值的收益。
-到了中期需要24包换取等同于传说的卡。
+换一种眼光来看，第一次开包平均3包能获得等同于一张普通传说价值的收益。
+到了中期需要6包换取等同于普通传说的收益。
 
-到了全卡则要接近80包。。。。。。:cry:
+到了全卡则要接近16包。。。。。。:cry:
 
-
+地精包和冠军包大致卡牌的比例变化不大，收益基本也差不多，不过每次开包都去精确计算这个概率大概只有处女座做得到吧～～
 
