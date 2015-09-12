@@ -14,9 +14,9 @@ tages: game hearthstone
 
 ----------------------------------------------------------------
 
-那么首先是开一包的收益如何计算。在不考虑什么实用不实用的情况下，我认为可以用实际获得的粉来计算。如果开出了自己没有的卡牌，那就是获得了对应卡牌合成价格的粉，如果开出了重复的那就是获得了分解价值的粉。
+那么首先是开一包的收益如何计算。在不考虑什么实用不实用的情况下，我认为可以用实际获得的粉尘来计算。如果开出了自己没有的卡牌，那就是获得了对应卡牌合成价格的粉尘，如果开出了重复的那就是获得了分解价值的粉尘。
 
-+ 然后一张卡的开出各种类型的概率如下：
++ 然后一张卡的开出各种稀有度的概率如下：
 
 ```
 普通 = 70%
@@ -30,7 +30,7 @@ tages: game hearthstone
 金色传说 = 0.111%
 ```
 
-+ 一张卡合成和分解的粉如下：
++ 一张卡合成和分解的对应粉尘如下：
 
 ```
 普通牌(白色)——分解得到5点奥术之尘/合成需要40点奥术之尘
@@ -44,7 +44,7 @@ tages: game hearthstone
 传说金色牌——分解得到1600点奥术之尘/合成需要3200点奥术之尘
 ```
 
-因此我们假设 对于经典卡包有普通 稀有 史诗 传说 以及金色卡牌总数为:
+因此我们假设 对于某种类型的卡包有普通 稀有 史诗 传说 以及金色卡牌总数为:
 > total_normal
 > total_rare
 > total_epic
@@ -54,7 +54,7 @@ tages: game hearthstone
 > total_gold_epic
 > total_gold_legend
 
-假设我们拥有 普通 稀有 史诗 传说 以及金色卡牌的数量为：
+假设我们拥有某种类型的开包的 普通 稀有 史诗 传说 以及金色卡牌的数量为：
 > current_normal
 > current_rare
 > current_epic
@@ -67,15 +67,25 @@ tages: game hearthstone
 那么我们一包的期望收益就是:
 
 ```
-( 70% * (current_normal / total_normal) * 5  + 70% * (1 - current_normal / total_normal) * 40 +
-21.4% * (current_rare / total_rare) * 20 + 21.4% * (1 - current_rare / total_rare) * 100 +
-4.28% * (current_epic / total_epic) * 100 + 4.28% * (1 - current_epic / total_epic) * 400 +
-1.08% * (current_legend / total_legend) * 400 + 1.08% * (1 - current_legend / total_legend) * 1600 +
-1.47% * (current_gold_normal / total_gold_normal) * 50 + 1.47% * (1 - current_gold_normal / total_gold_normal) * 400 +
-1.37% * (current_gold_rare / total_gold_rare) * 100 + 1.37% * (1 - current_gold_rare / total_gold_rare) * 800 +
-0.308% * (current_gold_epic / total_gold_epic) * 400 + 0.308% * (1 - current_gold_epic / total_gold_epic) * 1600 +
-0.111% * (current_gold_legend / total_gold_legend) * 1600 + 0.111% * (1 - current_gold_legend / total_gold_legend) * 3200 ) * 5
+( 70% * (current_normal / total_normal) * 5
++ 70% * (1 - current_normal / total_normal) * 40
++ 21.4% * (current_rare / total_rare) * 20
++ 21.4% * (1 - current_rare / total_rare) * 100
++ 4.28% * (current_epic / total_epic) * 100
++ 4.28% * (1 - current_epic / total_epic) * 400
++ 1.08% * (current_legend / total_legend) * 400
++ 1.08% * (1 - current_legend / total_legend) * 1600
++ 1.47% * (current_gold_normal / total_gold_normal) * 50
++ 1.47% * (1 - current_gold_normal / total_gold_normal) * 400
++ 1.37% * (current_gold_rare / total_gold_rare) * 100
++ 1.37% * (1 - current_gold_rare / total_gold_rare) * 800
++ 0.308% * (current_gold_epic / total_gold_epic) * 400
++ 0.308% * (1 - current_gold_epic / total_gold_epic) * 1600
++ 0.111% * (current_gold_legend / total_gold_legend) * 1600
++ 0.111% * (1 - current_gold_legend / total_gold_legend) * 3200 ) * 5
 ```
+
+把一张卡开出所有可能下获得的粉尘分别乘以出现这种情况的概率，再全部相加，就是一张卡的期望收益，最后再乘以5就是一包卡的期望收益.
 
 然后是目前三套卡的数量：
 
@@ -99,7 +109,9 @@ tages: game hearthstone
 传说：20张 (*1)
 ```
 
-让我们以经典包为例计算一下几个节点的收益
+可以看出来三套卡包每种卡的比例还是比较接近的，暴雪没有让某个卡包平均收益和之前有明显差异。
+
+让我们以经典包为例计算一下几个有代表性节点的收益
 
 第一次开包的收益：
 
@@ -132,7 +144,7 @@ tages: game hearthstone
 
 到了全卡则要接近16包。。。。。。:cry:
 
-大家最痛恨的莫过于蓝天白云（一张稀有四张普通），然后分解只得40尘，由上面的计算我们可以明星看出，这种收益是远低于平均水平的。然而平均收益最差都有107说明，
+大家最痛恨的莫过于蓝天白云（一张稀有四张普通），然后分解只得40尘，由上面的计算我们比较可以看出，这种收益是远低于平均水平的。然而平均收益最差都有107说明，
 开出史实和传说的收益巨大，拉高了平均收益。所以开包最重要的就是开史诗和开传说。。
 
-地精包和冠军包大致卡牌的比例变化不大，收益基本也差不多，不过每次开包都去精确计算这个概率大概只有处女座做得到吧～～
+最后数自己每个包已有卡牌还是挺麻烦的，不知道有没有方法，直接读取用户的卡牌收集信息。估计网易的盒子应该有这个能力，如果谁有途径，可以给他们提提建议，加这个功能。
