@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "炉石传说60包应该出几橙"
-date:   2015-09-04 23:34:01
+date:   2015-09-14 23:04:31
 categories: game
 tages: game hearthstone
 ---
