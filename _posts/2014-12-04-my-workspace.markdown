@@ -33,6 +33,8 @@ zsh提供了更好的补全和高亮，有更好的交互体验，兼容bash。�
 + `projectile` 项目管理插件，可以实现项目内查找并打开文件，项目内搜索关键字等常用功能。
 + `gist` 在emacs内查看新建和编辑自己的github gist。
 + `ack-and-a-half` 在emacs中使用ack
++ `helm` 和`ido`类似，候选项是竖着排列的，交互体验更好。不过有的时候我们对要操作的文件很确定，就不需要这样的交互，因此我没有默认开启
++ `magit` 在emacs中操作git,非常方便
 
 当然上述功能可能很多IDE都有，但我觉得emacs的优点就是作为编辑器所有语言通吃，并且易扩展。不过不建议在windows下使用。
 
@@ -42,7 +44,7 @@ zsh提供了更好的补全和高亮，有更好的交互体验，兼容bash。�
 ### 小工具
 + 终端 : [guake](https://github.com/Guake/guake/) ,这款终端用F12全局呼入和呼出，非常方便。
 
-+ `grep`的替代品 : [ack](http://beyondgrep.com/) ,`grep`的一个替代品，内置多种代码文件类型，非常适合源码搜索.
++ `grep`的替代品 : [ag](https://github.com/ggreer/the_silver_searcher) 内置多种代码文件类型，自动屏蔽版本控制的目录(.svn .git)，非常适合源码搜索,最重要的是速度飞快。
 
 + 截屏软件 : [shutter](http://shutter-project.org/) ,很小巧的截屏软件，可以截一个区域，一个页面。
 
