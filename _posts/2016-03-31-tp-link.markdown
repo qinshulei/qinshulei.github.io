@@ -1,0 +1,201 @@
+---
+layout: post
+title:  "TP-LINK TL-WR2041N 命令行控制"
+date:   2016-03-31 10:47:14
+categories: bash
+tages: bash
+---
+
+最近需要写脚本帮助IT实现自动化的绑定MAC地址，然后无线使用的就是普通的路由器TP-LINK TL-WR2041N，简单百度了一下没有API之类的东西。因此直接模拟POST请求吧。
+
+
+使用chrome的开发者工具，模拟了下登录的过程，发现居然没有登录的POST请求。然后又检察了一下cookie，发现已经有认证相关的cookie了，`Authorization	Basic%20YWRtaW46bUxhaDNwcCEh`.
+
+
+于是直接看网页的代码发现了如下代码:
+
+```
+function PCSubWin()
+{
+	if(CheckPswLength() == true )
+	{
+		var password = $("pcPassword").value;
+		var auth = "Basic "+Base64Encoding("admin:"+password);
+		document.cookie = "Authorization="+escape(auth)+";path=/";
+		location.reload();
+	}
+}
+```
+
+也就是说网页直接将密码存到cookie里，然后每次请求待上这个cookie进行认证。规则也写的很清除。这也就是说下次看到别人TP-link登录着的页面，也只要看下cookie,自己就可以模拟登录了。不过它的base64是自己实现的方法，可能不能解密
+
+```
+function utf8_encode (string)
+{
+	string = string.replace(/\r\n/g,"\n");
+	var utftext = "";
+
+	for (var n = 0; n < string.length; n++) {
+
+		var c = string.charCodeAt(n);
+
+		if (c < 128) {
+			utftext += String.fromCharCode(c);
+		}
+		else if((c > 127) && (c < 2048)) {
+			utftext += String.fromCharCode((c >> 6) | 192);
+			utftext += String.fromCharCode((c & 63) | 128);
+		}
+		else {
+			utftext += String.fromCharCode((c >> 12) | 224);
+			utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+			utftext += String.fromCharCode((c & 63) | 128);
+		}
+
+	}
+
+	return utftext;
+}
+
+function Base64Encoding(input)
+{
+	var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+	var output = "";
+	var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+	var i = 0;
+
+	input = utf8_encode(input);
+
+	while (i < input.length)
+	{
+
+		chr1 = input.charCodeAt(i++);
+		chr2 = input.charCodeAt(i++);
+		chr3 = input.charCodeAt(i++);
+
+		enc1 = chr1 >> 2;
+		enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+		enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+		enc4 = chr3 & 63;
+
+		if (isNaN(chr2)) {
+			enc3 = enc4 = 64;
+		} else if (isNaN(chr3)) {
+			enc4 = 64;
+		}
+
+		output = output +
+		keyStr.charAt(enc1) + keyStr.charAt(enc2) +
+		keyStr.charAt(enc3) + keyStr.charAt(enc4);
+
+	}
+
+	return output;
+}
+```
+
+接下来用 curl 模拟报文,来访问:
+
+```
+curl --cookie 'Authorization=Basic%20YWRtaW46bUxhaDNwcCEh; ChgPwdSubTag=; path=/' http://192.168.1.1/
+
+curl -v --cookie "Authorization=Basic%20YWRtaW46bUxhaDNwcCEh" http://172.18.18.105:88
+
+```
+
+接下来是绑定mac的页面 `userRpm/WlanMacFilterRpm.htm`, 通过开发者工具network，可以看到请求的报文
+
+```
+#添加
+http://192.168.1.1/userRpm/WlanMacFilterRpm.htm?Mac=b0-83-fe-a1-72-66&Desc=add+test+mac&entryEnabled=1&Changed=0&SelIndex=0&Page=4&Save=%B1%A3+%B4%E6
+
+#删除
+http://192.168.1.1/userRpm/WlanMacFilterRpm.htm?Del=31&Page=4
+
+```
+
+于是我们尝试直接发对应请求。
+
+```
+# 直接请求页面
+curl --get -v --cookie "Authorization=Basic%20YWRtaW46bUxhaDNwcCEh" http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm
+
+curl --cookie 'Authorization=Basic%20YWRtaW46bUxhaDNwcCEh; ChgPwdSubTag=;' http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm?Mac=b0-83-fe-a1-72-66&Desc=add+test+mac&entryEnabled=1&Changed=0&SelIndex=0&Page=4&Save=%B1%A3+%B4%E6
+
+curl --cookie 'Authorization=Basic%20YWRtaW46bUxhaDNwcCEh' http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm?Mac=b0-83-fe-a1-72-66&Desc=add+test+mac&entryEnabled=1&Changed=0&SelIndex=0&Page=4&Save=%B1%A3+%B4%E6
+```
+
+请求失败，说我们没权限，作为一个程序员，我觉得应该没有其他地方携带身份认证的信息了，因此肯定不是权限问题。这里经过一翻尝试终于找到了影响的地方，那就是请求头。一个一个尝试添加请求头最终发现是Referer的原因。
+
+```
+# header
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding:gzip,deflate,sdch
+Accept-Language:en,zh-CN;q=0.8,zh;q=0.6
+Cache-Control:no-cache
+Connection:keep-alive
+Cookie:Authorization=Basic%20YWRtaW46bUxhaDNwcCEh; ChgPwdSubTag=
+Host:172.18.18.105:88
+Pragma:no-cache
+Referer:http://172.18.18.105:88/userRpm/MenuRpm.htm
+User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2150.5 Safari/537.36
+
+# 查询页面
+curl -v --get \
+--header 'Cookie:Authorization=Basic%20YWRtaW46bUxhaDNwcCEh; ChgPwdSubTag=' \
+--header 'Referer:http://172.18.18.105:88/userRpm/MenuRpm.htm' \
+http://172.18.18.105:88/userRpm/WlanNetworkRpm.htm
+
+```
+
+到这里我们知道了，我们必需有Referer这个头.我们再尝试手工请求。
+
+```
+# HEAD
+Remote Address:172.18.18.105:88
+Request URL:http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm?Mac=00-1D-0F-11-22-33&Desc=qinshulei&entryEnabled=1&Changed=0&SelIndex=0&Page=4&Save=%B1%A3+%B4%E6
+Request Method:GET
+Status Code:200 OK
+
+Request Headersview source
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding:gzip,deflate,sdch
+Accept-Language:en,zh-CN;q=0.8,zh;q=0.6
+Cache-Control:no-cache
+Connection:keep-alive
+Cookie:Authorization=Basic%20YWRtaW46bUxhaDNwcCEh; ChgPwdSubTag=
+Host:172.18.18.105:88
+Pragma:no-cache
+Referer:http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm?Add=Add&Page=1
+User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2150.5 Safari/537.36
+
+Query String Parametersview sourceview URL encoded
+Mac:00-1D-0F-11-22-33
+Desc:qinshulei
+entryEnabled:1
+Changed:0
+SelIndex:0
+Page:4
+
+
+# bash command
+curl -v --get \
+--header 'Cookie:Authorization=Basic%20YWRtaW46bUxhaDNwcCEh; ChgPwdSubTag=' \
+--header 'Referer: http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm?Add=Add&Page=1' \
+'http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm?Mac=00-1D-0F-11-22-33&Desc=xxxxxxxx&entryEnabled=1&Changed=0&SelIndex=0&Page=4&Save=%B1%A3+%B4%E6'
+
+
+curl -v --get \
+--header 'Cookie:Authorization=Basic%20YWRtaW46bUxhaDNwcCEh; ChgPwdSubTag=' \
+--header 'Referer: http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm?Add=Add&Page=1' \
+'http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm?Mac=b0:83:fe:a1:72:66&Desc=xxxxxxxx&entryEnabled=1&Changed=0&SelIndex=0&Page=4&Save=%B1%A3+%B4%E6'
+
+curl -v --get \
+--header 'Cookie:Authorization=Basic%20YWRtaW46bUxhaDNwcCEh; ChgPwdSubTag=' \
+--header 'Referer: http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm?Add=Add&Page=1' \
+'http://172.18.18.105:88/userRpm/WlanMacFilterRpm.htm?Page=1'
+
+```
+
+
+搞定。
