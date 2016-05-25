@@ -3,7 +3,7 @@ layout: post
 title:  "TP-LINK TL-WR2041N 命令行控制"
 date:   2016-03-31 10:47:14
 categories: bash
-tages: bash
+tages: bash shell
 ---
 
 最近需要写脚本帮助IT实现自动化的绑定MAC地址，然后无线使用的就是普通的路由器TP-LINK TL-WR2041N，简单百度了一下没有API之类的东西。因此直接模拟POST请求吧。
