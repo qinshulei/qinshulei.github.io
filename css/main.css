@@ -168,3 +168,12 @@ ul.posts span {
     padding : 25px;
     border: 1px solid #ddd;
 }
+
+#service {
+    margin-top : 30px;
+    float: left
+    width:100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding : 25px;
+}
