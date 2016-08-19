@@ -12,10 +12,13 @@ permalink: pretty
 # site setting
 name: QinShulei
 description: 秦书磊的个人博客
+
+# url setting
 url: http://www.qinshulei.cn
 about_url: /about/
 archive_url: /archive/
 rss_url: /atom.xml
+bookmark_url: /bookmark/
 
 gems:
   - jemoji
