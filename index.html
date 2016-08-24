@@ -4,7 +4,7 @@ title: 书磊的首页
 ---
 <div>
   <div class="page-header text-center">
-      <h2 class="animated tada">欢迎光临<small> 这里有一些我学习中的流水账~</small></h2>
+      <h2>欢迎光临<small> 这里有一些我学习中的流水账~</small></h2>
   </div>
 
   <div class="posts-list">
@@ -49,7 +49,21 @@ title: 书磊的首页
 </nav>
 
 <script>
-  $(document).ready(function(){
-    $("#homelink").addClass("active");
-  });
+ function randomAnimate() {
+     var randomNum = parseInt(Math.random() * ANIMATE_EFFECTS.length,10);
+     var target = $("div.page-header h2");
+     target.removeClass().addClass("animated " + ANIMATE_EFFECTS[randomNum]);
+ }
+
+ function timeout(doSomeThing) {
+     setTimeout(function () {
+         doSomeThing();
+         timeout(doSomeThing);
+     }, 5000);
+ }
+
+ $(document).ready(function(){
+     $("#homelink").addClass("active");
+     timeout(randomAnimate);
+ });
 </script>
