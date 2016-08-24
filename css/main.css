@@ -177,3 +177,8 @@ ul.posts span {
     border: 1px solid #ddd;
     padding : 25px;
 }
+
+#more-work {
+    padding-top : 10px;
+    padding-bottom : 50px;
+}
