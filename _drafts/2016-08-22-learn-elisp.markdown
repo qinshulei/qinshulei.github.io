@@ -125,3 +125,8 @@ Run M-: (setq debug-on-error t) RET and any errors will open up the debugger.
 + read elisp cook book https://www.emacswiki.org/emacs/ElispCookbook
 
 + Programming in Emacs Lisp http://www.delorie.com/gnu/docs/emacs-lisp-intro/emacs-lisp-intro_toc.html
+
++ search from github to learn elip
+  `global-set-key kbd` search all key bind
+  `defun interactive language:"Emacs Lisp" extension:.el` search all interactive function
+  `hook language:"Emacs Lisp" extension:.el` search all hook
