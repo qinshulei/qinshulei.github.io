@@ -229,7 +229,7 @@ qinshulei:x:1000:
 
 #### 修改用户信息
 {% highlight bash %}
-$ sudo usermod -p 123456 qinsl0106
+$ sudo usermod -p 123456 username
 {% endhighlight %}
 
 
