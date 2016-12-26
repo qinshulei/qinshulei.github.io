@@ -26,8 +26,8 @@ git version 1.7.9.5
 
 + 配置gitconfig
 {% highlight bash %}
-$ git config --global user.name "qinsl0106"
-$ git config --global user.email "qinsl0106@thundersoft.com"
+$ git config --global user.name "username"
+$ git config --global user.email "username@thundersoft.com"
 $ git config --global core.editor emacs
 $ git config --global color.ui auto
 $ cat .gitconfig
@@ -42,7 +42,7 @@ $ cat id_rsa.pub # 将内容粘贴到gerrit或者其他的git库的配置里
 
 + 从gerrit库下载代码
 {% highlight bash %}
-$ git clone ssh://qinsl0106@192.168.65.11:29418/test/exercise-2a -b test
+$ git clone ssh://username@192.168.1.1:29418/test/exercise-2a -b test
 {% endhighlight %}
 
 
