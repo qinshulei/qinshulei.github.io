@@ -6,11 +6,12 @@ layout: default
   <p class="meta">{{ page.date | date_to_string }}</p>
 
   <div class="post">
-    {{ content }}
+      {{ content }}
   </div>
 
   <hr/>
-
+  {% include baidu_share.html %}
+  <hr/>
   <section id="more-work">
       {% if page.previous %}
       {% assign previous = page.previous %}
